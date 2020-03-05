@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  registry-cache-docker:
+    image: registry:2.7.1
+    environment: 
+    - REGISTRY_HTTP_ADDR=:5000
+    - REGISTRY_HTTP_SECRET=M3u26yce98Py9Ebl0maAJubvpIZR5VD
+    - REGISTRY_PROXY_REMOTEURL=https://registry-1.docker.io
+    - REGISTRY_LOG_FORMATTER=json
+    - REGISTRY_LOG_LEVEL=warn
+    - REGISTRY_LOG_ACCESSLOG_DISABLED=true
+    ports:
+    - "5001:5000"
+    volumes:
+    - "./cache/docker.io:/var/lib/registry"
+  registry-cache-quay:
+    image: registry:2.7.1
+    environment: 
+    - REGISTRY_HTTP_ADDR=:5000
+    - REGISTRY_HTTP_SECRET=M3u26yce98Py9Ebl0maAJubvpIZR5VD
+    - REGISTRY_PROXY_REMOTEURL=https://quay.io
+    - REGISTRY_LOG_FORMATTER=json
+    - REGISTRY_LOG_LEVEL=warn
+    - REGISTRY_LOG_ACCESSLOG_DISABLED=true
+    ports:
+    - "5002:5000"
+    volumes:
+    - "./cache/quay.io:/var/lib/registry"
+  registry-cache-gcr:
+    image: registry:2.7.1
+    environment: 
+    - REGISTRY_HTTP_ADDR=:5000
+    - REGISTRY_HTTP_SECRET=M3u26yce98Py9Ebl0maAJubvpIZR5VD
+    - REGISTRY_PROXY_REMOTEURL=https://gcr.io
+    - REGISTRY_LOG_FORMATTER=json
+    - REGISTRY_LOG_LEVEL=warn
+    - REGISTRY_LOG_ACCESSLOG_DISABLED=true
+    ports:
+    - "5003:5000"
+    volumes:
+    - "./cache/gcr.io:/var/lib/registry"
